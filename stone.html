@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stone Paper Scissor</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 50px; }
+    button { padding: 10px 20px; margin: 5px; font-size: 18px; }
+    #result { font-weight: bold; font-size: 20px; margin-top: 20px; }
+    #score { margin-top: 10px; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <h1>Stone Paper Scissor</h1>
+  
+  <p>Choose your move:</p>
+  <button onclick="play('Stone')">Stone ✊</button>
+  <button onclick="play('Paper')">Paper ✋</button>
+  <button onclick="play('Scissor')">Scissor ✌️</button>
+
+  <h2 id="result"></h2>
+  <p id="computerChoiceDisplay"></p>
+  <p id="score">You: 0 | Computer: 0</p>
+
+  <script>
+    let playerScore = 0;
+    let computerScore = 0;
+
+    function play(playerChoice) {
+      const choices = ['Stone', 'Paper', 'Scissor'];
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+      // Show computer choice
+      document.getElementById('computerChoiceDisplay').innerText = `Computer chose: ${computerChoice}`;
+
+      // Decide winner
+      let resultText = "";
+      if (playerChoice === computerChoice) {
+        resultText = `Tie!`;
+      } else if (
+        (playerChoice === 'Stone' && computerChoice === 'Scissor') ||
+        (playerChoice === 'Paper' && computerChoice === 'Stone') ||
+        (playerChoice === 'Scissor' && computerChoice === 'Paper')
+      ) {
+        resultText = `You Win!`;
+        playerScore++;
+      } else {
+        resultText = `You Lose!`;
+        computerScore++;
+      }
+
+      // Update result and score
+      document.getElementById('result').innerText = resultText;
+      document.getElementById('score').innerText = `You: ${playerScore} | Computer: ${computerScore}`;
+    }
+  </script>
+</body>
+</html>
